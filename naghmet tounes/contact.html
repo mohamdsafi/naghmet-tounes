@@ -13,9 +13,7 @@
 
   <main>
     <h1>Contact Us</h1>
-    <form action="mailto:mohamedsafi2004xd@gmail.com" method="POST" enctype="text/plain">
-
-
+    <form id="contact-form">
       <label for="name">Name</label>
       <input type="text" id="name" name="name" required />
 
@@ -27,6 +25,8 @@
 
       <button type="submit">Send Message</button>
     </form>
+
+    <div id="form-status" style="text-align:center; margin-top:10px;"></div>
 
     <div class="socials">
       <a href="#">Facebook</a> |
@@ -44,5 +44,24 @@
     </div>
     <p>&copy; 2025 Naghmet Tounes. All rights reserved.</p>
   </footer>
+
+  <script src="https://cdn.jsdelivr.net/npm/emailjs-com@3/dist/email.min.js"></script>
+  <script>
+    (function() {
+      emailjs.init("JAU3qAk11R24QWz8f"); // ⬅️ Replace this
+    })();
+
+    document.getElementById('contact-form').addEventListener('submit', function(event) {
+      event.preventDefault();
+
+      emailjs.sendForm('service_qc72no5', 'template_5athehm', this)
+        .then(function() {
+          document.getElementById('form-status').innerText = "✅ Message sent successfully!";
+        }, function(error) {
+          document.getElementById('form-status').innerText = "❌ Failed to send. Please try again.";
+          console.error(error);
+        });
+    });
+  </script>
 </body>
 </html>
